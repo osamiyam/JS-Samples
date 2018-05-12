@@ -29,3 +29,5 @@ function jacobi(n){
     }
     return null
 }
+
+puts(jacobi(500))

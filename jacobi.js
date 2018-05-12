@@ -11,3 +11,5 @@ function jacobi(n){
     }
     return p
 }
+
+puts(jacobi(200))
