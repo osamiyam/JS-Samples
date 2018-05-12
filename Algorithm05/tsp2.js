@@ -27,6 +27,24 @@ function draw_path(b){
     draw_line(pt1, pt2)
 }
 
+function dist(pt1, pt2){
+    var [x1, y1] = pt1
+    var [x2, y2] = pt2
+    var d1 = x1 - x2
+    var d2 = y1 - y2
+    return Math.sqrt(d1 * d1 + d2 * d2)
+}
+
+function path_length(b, pts){
+    var i
+    var sum = 0.0
+    for (i = 0; i < b.length - 1; i++){
+        sum += dist(pts[b[i]], pts[b[i + 1]])
+    }
+    sum += dist(pts[b[b.length - 1]], pts[b[0]])
+    return sum
+}
+
 function draw_it(k, dd, m){
     puts(k + ":" + dd)
     cls()
