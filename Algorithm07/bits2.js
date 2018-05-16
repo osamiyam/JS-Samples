@@ -1,4 +1,3 @@
-var puts = console.log
 
 function print_bits(n, prefix){
     if (n == 0) puts(prefix)
