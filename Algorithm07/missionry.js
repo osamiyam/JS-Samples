@@ -1,4 +1,3 @@
-
 var move_list = [[1, 0], [0, 1], [1, 1], [2, 0], [0, 2]]
 
 function move_state(st, mv){
@@ -37,36 +36,42 @@ function put_tabu_list(st){
     return true
 }
 
-var init_state = [3, 3, 0, 0, 0]
-var final_state = [0, 0, 1, 3, 3]
-put_tabu_list(init_state)
-queue.push([init_state, null])
+function compute(){
+    var queue = []
+    var init_state = [3, 3, 0, 0, 0]
+    var final_state = [0, 0, 1, 3, 3]
+    put_tabu_list(init_state)
+    queue.push([init_state, null])
 
-var queue = []
-
-while(true){
-    if (queue.length == 0){
-        puts("no solutions.")
-        return
+    while(true){
+	if (queue.length == 0){
+            puts("no solutions.")
+            return
+	}
+	var ele = queue.shift()
+	var [st, parent] = ele
+	if (eq_state(st, final_state)) break;
+	else if (check_cond(st)){
+            for (var i = 0; i < move_list.length; i++){
+		var m = move_state(st, move_list[i])
+		if (m == null) continue
+		if (put_tabu_list(m) == false) continue
+		queue.push([m, ele])
+            }
+	}
     }
-    var ele = queue.shift()
-    var [st, parent] = ele
-    if (eq_state(st, final_state)) break;
-    else if (check_cond(st)){
-        for (var i = 0; i < move_list.length; i++){
-            var m = move_state(st, move_list[i])
-            if (m == null) continue
-            if (put_tabu_list(m) == false) continue
-            queue.push([m, ele])
-        }
+    var answer = []
+    while (ele != null){
+	var [st, parent] = ele
+	answer.unshift(st)
+	ele = parent
     }
+    s = ""
+    for (var i = 0;  i < answer.length; i++){
+	if (i < 10) s += " "
+	s += i + " : " + answer[i] + "\n"
+    }
+    puts(s)
 }
 
-var answer = []
-while (ele != null){
-    var [st, parent] = ele
-    answer.unshift(st)
-    ele = parent
-}
-for (var i = 0;  i < answer.length; i++)
-    puts(i + " : " + answer[i])
+compute()
