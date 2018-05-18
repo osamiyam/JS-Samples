@@ -36,5 +36,5 @@ function test2(){
     puts((t2 - t1) + " ms")
 }
 
-// test1()
-test2()
+test1()
+// test2()
