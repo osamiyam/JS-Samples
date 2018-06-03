@@ -1,5 +1,3 @@
-puts = console.log
-
 var UP = 0
 var DOWN = 1
 var RIGHT = 2
