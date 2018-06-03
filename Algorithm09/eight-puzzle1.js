@@ -1,11 +1,3 @@
-
-var print
-if (print == undefined)
-    puts = console.log
-else
-    puts = print
-
-
 var UP = 0
 var DOWN = 1
 var RIGHT = 2
