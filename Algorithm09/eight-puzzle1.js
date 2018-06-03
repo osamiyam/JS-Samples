@@ -108,32 +108,4 @@ function work(){
 }
 
 
-function work2(){
-   var state1 = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-   var state = make_random_state(40, state1)
-   puts(state)
-   start_board8()
-   var mm = []
-   var queue = [make_node(null, state, null)]
-   while (queue.length > 0){
-      var node = queue.shift()
-      if (eq_pat(node[1], state1) == 0) break
-      var mlist = next_move_list(node[1], node[0])
-      for (var i = 0; i < mlist.length; i++){
-          var st = move(node[1], mlist[i])
-          if (in_list(encode(st), mm)) continue
-          var node1 = make_node(mlist[i], st, node)
-          mm.push(encode(st))
-          queue.push(node1)
-      }
-   }
-   action = ""
-   while (true){
-      if (node[0] == null) break
-      action = dir[node[0]] + action
-      node = node[2]
-   }
-   puts(action)
-}    
-
 work()
