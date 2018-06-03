@@ -6,7 +6,7 @@ var dir = "udrl"
 
 function find_zero(state){
     for (var i =0; i < 9; i++){
-	if (state[i] == 0) return i
+        if (state[i] == 0) return i
     }
     return null
 }
@@ -16,17 +16,17 @@ function move(state, i){
     var ix = z % 3
     var iy = Math.floor(z / 3)
     if (i == DOWN && iy > 0){
-	state[z] = state[z - 3]
-	state[z - 3] = 0
+        state[z] = state[z - 3]
+        state[z - 3] = 0
     } else if (i == UP && iy < 2){
-	state[z] = state[z + 3]
-	state[z + 3] = 0
+        state[z] = state[z + 3]
+        state[z + 3] = 0
     } else if (i == RIGHT && ix > 0){
-	state[z] = state[z - 1]
-	state[z - 1] = 0
+        state[z] = state[z - 1]
+        state[z - 1] = 0
     } else if (i == LEFT && ix < 2){
-	state[z] = state[z + 1]
-	state[z + 1] = 0
+        state[z] = state[z + 1]
+        state[z + 1] = 0
     }
     return state
 }
@@ -38,13 +38,13 @@ function next_move_list(state, last_move){
     var ix = z % 3
     var iy = Math.floor(z / 3)
     if (ix > 0 && last_move != LEFT)
-	moves.push(RIGHT)
+        moves.push(RIGHT)
     if (ix < 2 && last_move != RIGHT)
-	moves.push(LEFT)
+        moves.push(LEFT)
     if (iy > 0 && last_move != UP)
-	moves.push(DOWN)
+        moves.push(DOWN)
     if (iy < 2 && last_move != DOWN)
-	moves.push(UP)
+        moves.push(UP)
     return moves
 }
 
@@ -52,11 +52,11 @@ function make_random_state(N, state){
     var last_move = null
     var res = ""
     for (var n = 0; n < N; n++){
-	var moves =  next_move_list(state, last_move)
-	var m = Math.floor(Math.random() * moves.length)
-	res = res + dir[moves[m]]
-	state = move(state, moves[m])
-	last_move = moves[m]
+        var moves =  next_move_list(state, last_move)
+        var m = Math.floor(Math.random() * moves.length)
+        res = res + dir[moves[m]]
+        state = move(state, moves[m])
+        last_move = moves[m]
     }
     return res
 }
@@ -67,7 +67,7 @@ function make_node(dir, pat, parent){
 
 function eq_pat(pat1, pat2){
     for (var i = 0; i < 9; i++){
-	if (pat1[i] != pat2[i]) return 1
+        if (pat1[i] != pat2[i]) return 1
     }
     return 0
 }
@@ -75,13 +75,13 @@ function eq_pat(pat1, pat2){
 function encode(pat){
     var s = 0
     for (var i = 0; i < 9; i++)
-	s = s * 9 + pat[i]
+        s = s * 9 + pat[i]
     return s
 }
 
 function in_list(a, lst){
     for(var i = 0; i < lst.length; i++){
-	if (a == lst[i]) return true
+        if (a == lst[i]) return true
     }
     return false
 }
@@ -91,16 +91,16 @@ function work(){
     start_board8()
     var res = make_random_state(200, state)
     var transform = function (c){
-	if (c == 'u') c = 'd'
-	else if (c == 'd') c = 'u'
-	else if (c == 'r') c = 'l'
-	else if (c = 'l') c = 'r'
-	return c
+        if (c == 'u') c = 'd'
+        else if (c == 'd') c = 'u'
+        else if (c == 'r') c = 'l'
+        else if (c = 'l') c = 'r'
+        return c
     }
     set_board_state(state)
     resx = ""
     for (var i = 0; i < res.length; i++)
-	resx = transform(res[i]) + resx
+        resx = transform(res[i]) + resx
     puts(state)
     puts(res)
     puts(resx)
